@@ -35,4 +35,14 @@ class Link extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, LinkProduct::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'code', 'code')->where('complete', 1);
+    }
 }

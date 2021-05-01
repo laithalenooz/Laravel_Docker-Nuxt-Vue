@@ -13,16 +13,18 @@ class CreateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create( 'order_items', function ( Blueprint $table ) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders');
-            $table->string('product_title');
-            $table->string('price');
-            $table->unsignedInteger('quantity');
-            $table->decimal('admin_revenue');
-            $table->decimal('ambassador_revenue');
+            $table->unsignedBigInteger( 'order_id' );
+            $table->string( 'product_title' );
+            $table->decimal( 'price' );
+            $table->unsignedInteger( 'quantity' );
+            $table->decimal( 'admin_revenue' );
+            $table->decimal( 'ambassador_revenue' );
             $table->timestamps();
-        });
+
+            $table->foreign( 'order_id' )->references( 'id' )->on( 'orders' );
+        } );
     }
 
     /**
@@ -32,6 +34,6 @@ class CreateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_items');
+        Schema::dropIfExists( 'order_items' );
     }
 }

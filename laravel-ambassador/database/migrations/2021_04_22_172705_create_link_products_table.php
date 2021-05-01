@@ -16,10 +16,10 @@ class CreateLinkProductsTable extends Migration
         Schema::create('link_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('link_id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_id')->nullable();
 
             $table->foreign('link_id')->references('id')->on('links');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
         });
     }
 
